@@ -1,5 +1,6 @@
 import express from "express";
 import User from "../models/user.js";
+import { auth } from "../middleware/auth.js";
 
 const router = new express.Router();
 
@@ -49,7 +50,7 @@ router.post("/users/login", async (req, res) => {
 //@description Update user profile
 //@route PUT /users/profile
 //@access Private
-router.put("/users/profile", async (req, res) => {
+router.put("/users/profile", auth, async (req, res) => {
   try {
     // console.log(req.body._id);
     const user = await User.findById(req.body._id);
@@ -78,5 +79,6 @@ router.put("/users/profile", async (req, res) => {
 //@description Logout user
 //@route POST /users/logout
 //@access Private
+router.post("/users/logout", async (req, res) => {});
 
 export default router;

@@ -117,7 +117,28 @@ router.get("/users/me", auth, async (req, res) => {
   }
 });
 
-//@description search for user by email
-//@route
+//@description get/search user by email
+//@route GET /users/search
+//@access Public
+router.get("/users/search", async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.body.email });
+
+    if (!user) {
+      throw new Error("User not found!");
+    }
+    const codechefData = await getRawData(user.codechefUsername);
+
+    const userData = [
+      { codechefData: codechefData },
+      { codeforcesData: {} },
+      { hackerrankData: {} },
+    ];
+
+    res.send(userData);
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 export default router;

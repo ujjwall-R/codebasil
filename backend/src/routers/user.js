@@ -141,4 +141,43 @@ router.get("/users/search", async (req, res) => {
   }
 });
 
+//@description follow other user
+//@route POST /users/follow/:email
+//@access Private
+router.post("/users/follow/:email", auth, async (req, res) => {
+  try {
+    const userToFollow = await User.findOne({ email: req.params.email });
+    const user = req.user;
+
+    if (!userToFollow) {
+      throw new Error("No such user exist!");
+    }
+
+    if (!user.following.includes(userToFollow.email)) {
+      user.following.push(userToFollow.email);
+    }
+
+    const updatedUser = await user.save();
+    res.json({ updatedUser });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+//@description unfollow user
+//@route POST /users/unfollow/:email
+//@access Private
+router.post("/users/unfollow/:email", auth, async (req, res) => {
+  try {
+    const user = req.user;
+
+    user.following = user.following.filter((em) => em !== req.params.email);
+
+    const updatedUser = await user.save();
+    res.json({ updatedUser });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 export default router;

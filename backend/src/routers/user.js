@@ -4,7 +4,7 @@ import { auth } from "../middleware/auth.js";
 
 const router = new express.Router();
 
-// @description trail
+// @description testing
 router.get("/hi", async (req, res) => {
   try {
     res.send("Route working.");

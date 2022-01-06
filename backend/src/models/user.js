@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema({
     trim: true,
   },
   codechefUsername: { type: String, required: true, trim: true },
+  following: [],
   tokens: [{ token: { type: String, require: true } }],
 });
 

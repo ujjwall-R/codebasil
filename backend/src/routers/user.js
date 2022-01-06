@@ -1,6 +1,7 @@
 import express from "express";
 import User from "../models/user.js";
 import { auth } from "../middleware/auth.js";
+import { getRawData } from "../codechef.js";
 
 const router = new express.Router();
 
@@ -53,7 +54,7 @@ router.post("/users/login", async (req, res) => {
 router.put("/users/profile", auth, async (req, res) => {
   try {
     // console.log(req.body._id);
-    const user = await User.findById(req.body._id);
+    const user = req.user;
 
     if (user) {
       user.name = req.body.name || user.name;
@@ -103,5 +104,20 @@ router.post("/users/logoutall", auth, async (req, res) => {
     res.status(500).send();
   }
 });
+
+//@description display personal data
+//@route POST /users/me
+//@access Private
+router.get("/users/me", auth, async (req, res) => {
+  try {
+    const codechefData = await getRawData(req.user.codechefUsername);
+    res.send({ user: req.user, codechefData });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+//@description search for user by email
+//@route
 
 export default router;

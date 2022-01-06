@@ -1,11 +1,11 @@
 import cheerio from "cheerio";
 import puppeteer from "puppeteer";
 
-const getRawData = async (URL) => {
+const getRawData = async (un) => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
-  await page.goto("https://www.codechef.com/users/ujjwal_2900", {
+  await page.goto(`https://www.codechef.com/users/${un}`, {
     timeout: 180000,
   });
 
@@ -48,6 +48,7 @@ const getRawData = async (URL) => {
     username: uname,
     profession: profession,
     institution: institution,
+    location: location,
     stars: stars,
     recentActivities: recentActivities,
   };
@@ -55,5 +56,4 @@ const getRawData = async (URL) => {
   return codeChefData;
 };
 
-const codeChefData = await getRawData();
-console.log(codeChefData);
+export { getRawData };

@@ -79,6 +79,29 @@ router.put("/users/profile", auth, async (req, res) => {
 //@description Logout user
 //@route POST /users/logout
 //@access Private
-router.post("/users/logout", async (req, res) => {});
+router.post("/users/logout", auth, async (req, res) => {
+  try {
+    req.user.tokens = req.user.tokens.filter(
+      (token) => token.token !== req.token
+    );
+    await req.user.save();
+    res.send({ message: "logged out successfully" });
+  } catch (error) {
+    req.status(500).send();
+  }
+});
+
+//@description Logout from all devices
+//@route POST /users/logoutall
+//@access Private
+router.post("/users/logoutall", auth, async (req, res) => {
+  try {
+    req.user.tokens = [];
+    await req.user.save();
+    res.send({ message: "Logged out" });
+  } catch (error) {
+    res.status(500).send();
+  }
+});
 
 export default router;

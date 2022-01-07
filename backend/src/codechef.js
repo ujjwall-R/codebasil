@@ -6,6 +6,7 @@ const getRawData = async (un) => {
   const page = await browser.newPage();
 
   await page.goto(`https://www.codechef.com/users/${un}`, {
+    // timeout: 180000,
     timeout: 180000,
   });
 
@@ -29,9 +30,17 @@ const getRawData = async (un) => {
     .children[0].data;
   const stars = $(".rating-star").children().length;
 
+  let act = "";
+  let point = "";
   let recentActivities = [];
   for (let i = 0; i < 10; i++) {
-    recentActivities.push(
+    point = $(
+      `#rankContentDiv > div:nth-child(1) > table > tbody > tr:nth-child(${
+        i + 1
+      }) > td:nth-child(3) > span`
+    ).text();
+    // console.log(point);
+    act =
       `Attempted a ${$(
         `#rankContentDiv > div:nth-child(1) > table > tbody > tr:nth-child(${
           i + 1
@@ -40,8 +49,8 @@ const getRawData = async (un) => {
         `#rankContentDiv > div:nth-child(1) > table > tbody > tr:nth-child(${
           i + 1
         }) > td:nth-child(1) > span > span`
-      ).text()}`
-    );
+      ).text()}.` + `${point === "accepted" ? `Solution accepted.` : ``}`;
+    recentActivities.push(act);
   }
 
   const codeChefData = {

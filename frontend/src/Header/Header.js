@@ -4,9 +4,8 @@ import Profile from "../assets/aditya.jpg";
 import { startSession } from "mongoose";
 const Header = (props) => {
   const [style, setStyle] = useState("flase");
-  
+
   const changeStyle = () => {
-  
     setStyle(!style);
   };
 
@@ -33,7 +32,7 @@ const Header = (props) => {
           d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
         />
       </svg>
-      <header id={style ? "header" : "mobHeader"} >
+      <header id={style ? "header" : "mobHeader"}>
         <div className="d-flex flex-column">
           <img src={Profile} className="img-fluid rounded-circle mt-4" />
           <div className="profile">
@@ -48,6 +47,7 @@ const Header = (props) => {
 
             <h3 className="text-center mt-5"><a href="#">HACKERRANK</a></h3>
             <div className="text-center">{stars}</div>
+
           </div>
         </div>
       </header>

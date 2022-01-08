@@ -1,11 +1,12 @@
 import cheerio from "cheerio";
 import puppeteer from "puppeteer";
 
-const getRawData = async (URL) => {
+const getRawData = async (un) => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
-  await page.goto("https://www.codechef.com/users/ujjwal_2900", {
+  await page.goto(`https://www.codechef.com/users/${un}`, {
+    // timeout: 180000,
     timeout: 180000,
   });
 
@@ -29,9 +30,17 @@ const getRawData = async (URL) => {
     .children[0].data;
   const stars = $(".rating-star").children().length;
 
+  let act = "";
+  let point = "";
   let recentActivities = [];
   for (let i = 0; i < 10; i++) {
-    recentActivities.push(
+    point = $(
+      `#rankContentDiv > div:nth-child(1) > table > tbody > tr:nth-child(${
+        i + 1
+      }) > td:nth-child(3) > span`
+    ).text();
+    // console.log(point);
+    act =
       `Attempted a ${$(
         `#rankContentDiv > div:nth-child(1) > table > tbody > tr:nth-child(${
           i + 1
@@ -40,14 +49,15 @@ const getRawData = async (URL) => {
         `#rankContentDiv > div:nth-child(1) > table > tbody > tr:nth-child(${
           i + 1
         }) > td:nth-child(1) > span > span`
-      ).text()}`
-    );
+      ).text()}.` + `${point === "accepted" ? `Solution accepted.` : ``}`;
+    recentActivities.push(act);
   }
 
   const codeChefData = {
     username: uname,
     profession: profession,
     institution: institution,
+    location: location,
     stars: stars,
     recentActivities: recentActivities,
   };
@@ -55,5 +65,4 @@ const getRawData = async (URL) => {
   return codeChefData;
 };
 
-const codeChefData = await getRawData();
-console.log(codeChefData);
+export { getRawData };

@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema({
     trim: true,
   },
   codechefUsername: { type: String, required: true, trim: true },
+  following: [],
   tokens: [{ token: { type: String, require: true } }],
 });
 
@@ -29,18 +30,28 @@ userSchema.methods.generateAuthToken = async function () {
   return token;
 };
 
+//removing password and tokens before converting to json
+userSchema.methods.toJSON = function () {
+  const user = this;
+  const userObject = user.toObject();
+
+  delete userObject.password;
+  delete userObject.tokens;
+  return userObject;
+};
+
 //searching for email
 userSchema.statics.findByCredentials = async (email, password) => {
   const user = await User.findOne({ email });
 
   if (!user) {
-    throw new Error("Unable to login");
+    throw new Error("User not found");
   }
 
   const isMatch = await bcrypt.compare(password, user.password);
 
   if (!isMatch) {
-    throw new Error("Unable to Login");
+    throw new Error("User not found");
   }
 
   return user;

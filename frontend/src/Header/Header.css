@@ -63,7 +63,7 @@
     z-index: 9997;
     transition: all 0.5s;
     padding: 0 15px;
-    background: #040b14;
+    background: rgb(0, 56, 78);
     overflow-y: auto;
   }
   #mobHeader .profile h1 {
@@ -75,7 +75,11 @@
     text-align-last: center;
     font-family: "Poppins", sans-serif;
   }
-  #mobHeader .profile h1 a, #mobHeader .profile h1 a:hover {
+
+  #mobHeader .profile a {
+    text-decoration: none;
+  }
+  #mobHeader .profile h1 a, #mobHeader .profile h1 a:hover,  #mobHeader .profile h3 a, #mobHeader .profile h3 a:hover{
     color: #fff;
     text-decoration: none;
   }

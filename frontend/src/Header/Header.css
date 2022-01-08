@@ -1,0 +1,87 @@
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 300px;
+    transition: all ease-in-out 0.5s;
+    z-index: 9997;
+    transition: all 0.5s;
+    padding: 0 15px;
+    background: rgb(0, 56, 78);
+    overflow-y: auto;
+  }
+  #header .profile h1 {
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+    font-weight: 600;
+    -moz-text-align-last: center;
+    text-align-last: center;
+    font-family: "Poppins", sans-serif;
+  }
+  #header .profile h1 a, #header .profile h1 a:hover,  #header .profile h3 a, #header .profile h3 a:hover {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 200;
+  }
+  
+  @media (max-width: 1199px) {
+    #header {
+      left: -300px;
+    }
+  }
+  
+  .mobile-nav-toggle {
+    position: fixed;
+    left: 15px;
+    top: 5px;
+    z-index: 9998;
+    border: 0;
+    font-size: 24px;
+    transition: all 0.4s;
+    outline: none !important;
+    background-color: #149ddd;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+    border-radius: 50px;
+    cursor: pointer;
+  }
+
+  #mobHeader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 300px;
+    transition: all ease-in-out 0.5s;
+    z-index: 9997;
+    transition: all 0.5s;
+    padding: 0 15px;
+    background: #040b14;
+    overflow-y: auto;
+  }
+  #mobHeader .profile h1 {
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+    font-weight: 600;
+    -moz-text-align-last: center;
+    text-align-last: center;
+    font-family: "Poppins", sans-serif;
+  }
+  #mobHeader .profile h1 a, #mobHeader .profile h1 a:hover {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  @media (max-width: 1199px) {
+    #mobHeader {
+      left: 0px;
+    }
+  }

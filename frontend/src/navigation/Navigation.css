@@ -1,0 +1,28 @@
+.navbar {
+    background-color: rgb(0, 113, 158);
+}
+.navbar ul {
+    display: flex;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+.navbar ul li {
+    list-style-type: none;
+}
+.navbar ul li a{
+    text-decoration: none;
+    color: white;
+}
+.navbar ul li a h4 {
+    font-weight: 340;
+}
+.navbar button {
+    background: none;
+    border-color: white;
+    border-radius: 13px;
+    color: white;
+    font-weight: 350;
+    border-width: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+}

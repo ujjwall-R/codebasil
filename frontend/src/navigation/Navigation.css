@@ -16,13 +16,3 @@
 .navbar ul li a h4 {
     font-weight: 340;
 }
-.navbar button {
-    background: none;
-    border-color: white;
-    border-radius: 13px;
-    color: white;
-    font-weight: 350;
-    border-width: 1px;
-    padding-left: 15px;
-    padding-right: 15px;
-}

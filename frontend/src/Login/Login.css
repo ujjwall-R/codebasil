@@ -1,0 +1,78 @@
+.login {
+    width: 100vw;
+    height: 100vh;
+}
+.login_header {
+    border-bottom: 0.1px solid rgb(0, 60, 83);
+}
+.login_header h1{
+    color: rgb(0, 60, 83);
+    font-weight: 650;
+}
+.continue p{
+    font-weight: 800;
+}
+
+.login form button {
+    background: none;
+    background-color: rgb(0, 60, 83);
+    border-radius: 500px;
+    color: white;
+    font-weight: 350;
+    border-width: 1px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+}
+form label {
+    font-weight: 700;
+}
+form input {
+    width: 350px;
+    height: 33px;
+    border-width: 0.3px;
+    border-color: rgb(160, 160, 160);
+    background: none;
+}
+.login form a {
+    color: rgb(99, 99, 99);
+}
+.form_border {
+    border-bottom: 0.07px solid rgb(0, 74, 104);
+}
+.noAccount p {
+    font-weight: 800;
+}
+
+.noAccount button {
+    background: none;
+    border-radius: 500px;
+    color: rgb(0, 74, 104);
+    font-weight: 350;
+    border-width: 1px;
+    padding-left: 45px;
+    padding-right: 45px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+.noAccount button:hover {
+    
+    background: none;
+    background-color: rgb(0, 60, 83);
+    border-radius: 500px;
+    color: white;
+    font-weight: 350;
+    border-width: 1px;
+    padding-left: 45px;
+    padding-right: 45px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    font-weight: 500;
+    transition: 450ms;
+}

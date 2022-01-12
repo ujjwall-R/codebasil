@@ -20,7 +20,7 @@ const Login = (props) => {
     if (action.type === "USER_INPUT") {
       return {
         valuePassword: action.val,
-        passwordIsValid: action.val.trim().length > 6,
+        passwordIsValid: action.val.trim().length >= 6,
       };
     }
     return {
@@ -28,7 +28,6 @@ const Login = (props) => {
       passwordIsValid: false,
     };
   };
-
 
   const [emailState, dispachedEmail] = useReducer(emailReducer, {
     valueEmail: "",
@@ -42,7 +41,7 @@ const Login = (props) => {
 
   const { emailIsValid: eIsValid } = emailState;
   const { passwordIsValid: pIsVaild } = passwordState;
-  
+
   useEffect(() => {
     const identifer = setTimeout(() => {
       setFormIsVAlid(emailState.emailIsValid && passwordState.passwordIsValid);
@@ -61,8 +60,10 @@ const Login = (props) => {
   };
   const onSubmitHandler = (event) => {
     event.preventDefault();
+    // console.log(formIsValid);
     if (formIsValid) {
-      props.onLogin(emailState.emailIsValid, passwordState.passwordIsValid);
+      props.onLogin(emailState.valueEmail, passwordState.valuePassword);
+      // console.log(emailState.valueEmail, passwordState.valuePassword);
     }
   };
   return (

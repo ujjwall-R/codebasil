@@ -1,0 +1,48 @@
+
+.signup_header {
+    border-bottom: 0.1px solid rgb(0, 60, 83);
+}
+.signup_header h1{
+    color: rgb(0, 60, 83);
+    font-weight: 650;
+}
+.header_description h3{
+    font-weight: 750;
+    letter-spacing: 0.7px;
+}
+
+.signup form label {
+    font-weight: 750;
+    font-size: 15px;
+    letter-spacing: 0.2px;
+}
+
+.signup form input {
+    width: 475px;
+    border-color: rgb(100, 100, 100);
+    border-width: 1px;
+    height: 50px;
+    border-radius: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    font-size: 17px;
+}
+
+.signup ::placeholder {
+    color: rgb(87, 87, 87);
+}
+
+.signup form button {
+    background: none;
+    background-color: rgb(0, 60, 83);
+    border-radius: 500px;
+    color: white;
+    font-weight: 350;
+    border-width: 1px;
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+}

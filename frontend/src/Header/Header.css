@@ -41,7 +41,7 @@
     font-size: 24px;
     transition: all 0.4s;
     outline: none !important;
-    background-color: #149ddd;
+    background: none;
     color: #fff;
     width: 40px;
     height: 40px;
@@ -51,6 +51,61 @@
     line-height: 0;
     border-radius: 50px;
     cursor: pointer;
+  }
+  .toggler-icon {
+    width: 1.5em;
+    height: 1em;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    transform: rotate(0deg);
+    transition: 400ms ease-in-out;
+  }
+
+  .toggler-icon span {
+    display: block;
+    position: absolute;
+    height: 0.07em;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: 400ms ease-in-out;
+  }
+  
+  .toggler-icon span:nth-child(1) {
+    top: 0em;
+  }
+  
+  .toggler-icon span:nth-child(2),
+  .toggler-icon span:nth-child(3) {
+    top: 0.4em;
+  }
+  
+  .toggler-icon span:nth-child(4) {
+    top: 0.79em;
+  }
+  
+  .toggler-icon.open span:nth-child(1) {
+    top: 0.55em;
+    width: 0%;
+    left: 50%;
+  }
+  
+  .toggler-icon.open span:nth-child(2) {
+    transform: rotate(45deg);
+  }
+  
+  .toggler-icon.open span:nth-child(3) {
+    transform: rotate(-45deg);
+  }
+  
+  .toggler-icon.open span:nth-child(4) {
+    top: 0.45em;
+    width: 0%;
+    left: 50%;
   }
 
   #mobHeader {

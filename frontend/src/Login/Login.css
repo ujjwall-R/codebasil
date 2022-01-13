@@ -27,16 +27,34 @@
     font-weight: 500;
     letter-spacing: 1.5px;
 }
-form label {
+.login form label {
     font-weight: 700;
 }
-form input {
+.login form input {
     width: 350px;
-    height: 33px;
+    height: 42px;
     border-width: 0.3px;
-    border-color: rgb(160, 160, 160);
     background: none;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
+.emailInvalid input,  .passwordInvalid input {
+    border-color: red !important;
+}
+
+.emailInvalid input:focus, .passwordInvalid input:focus {
+    outline: none !important;
+    border: 2px solid red;
+
+}
+
+.emailInvalid p, .passwordInvalid p {
+    color: red;
+    font-weight: 650;
+    font-size: 14px;
+}
+
 .login form a {
     color: rgb(99, 99, 99);
 }

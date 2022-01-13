@@ -3,6 +3,8 @@ import "./Login.css";
 
 const Login = (props) => {
   const [formIsValid, setFormIsVAlid] = useState(false);
+  const [emailIsTouched, setEmailIsTouched] = useState(false);
+  const [passwordIsTouched, setPasswordIsTouched] = useState(false);
   const emailReducer = (state, action) => {
     if (action.type === "USER_INPUT") {
       return {
@@ -58,13 +60,28 @@ const Login = (props) => {
   const passwordChangeHandler = (event) => {
     dispachedPassword({ type: "USER_INPUT", val: event.target.value });
   };
+
+  const onEmailBlurHandler = () => {
+    setEmailIsTouched(true);
+  };
+
+  const onPasswordBlurHandler = () => {
+    setPasswordIsTouched(true);
+  };
+
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    // console.log(formIsValid);
+
+    setEmailIsTouched(true);
+    setPasswordIsTouched(true);
     if (formIsValid) {
-      props.onLogin(emailState.valueEmail, passwordState.valuePassword);
-      // console.log(emailState.valueEmail, passwordState.valuePassword);
+      props.onLogin(emailState.emailIsValid, passwordState.passwordIsValid);
+      console.log(emailState.email);
     }
+  };
+
+  const onSignupHandler = () => {
+    props.onSignup();
   };
   return (
     <Fragment>
@@ -88,24 +105,60 @@ const Login = (props) => {
               <p>To continue, login to Codebasil.</p>
             </div>
             <div className="mb-2 mt-5">
-              <label>Login Id</label>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-envelope-fill"
+                viewBox="0 0 16 16"
+              >
+                <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z" />
+              </svg>
+              <label className="ms-2">Email Id</label>
             </div>
 
-            <input
-              type="email"
-              placeholder="    username"
-              onChange={emailChangeHandler}
-            ></input>
+            <div
+              className={
+                emailIsTouched && !emailState.emailIsValid ? "emailInvalid" : ""
+              }
+            >
+              <input
+                type="email"
+                placeholder="username"
+                onChange={emailChangeHandler}
+                onBlur={onEmailBlurHandler}
+              ></input>
+              {emailIsTouched && !emailState.emailIsValid && (
+                <p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-square-fill" viewBox="0 0 16 16">
+                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+              </svg> Enter a valid email</p>
+              )}
+            </div>
           </div>
           <div>
             <div className="mt-2 mb-2">
               <label>Password</label>
             </div>
-            <input
-              typr="password"
-              placeholder="    Password"
-              onChange={passwordChangeHandler}
-            ></input>
+            <div
+              className={
+                passwordIsTouched && !passwordState.passwordIsValid
+                  ? "passwordInvalid"
+                  : ""
+              }
+            >
+              <input
+                type="password"
+                placeholder="Password"
+                onChange={passwordChangeHandler}
+                onBlur={onPasswordBlurHandler}
+              ></input>
+              {passwordIsTouched && !passwordState.passwordIsValid && (
+                <p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-square-fill" viewBox="0 0 16 16">
+                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+              </svg> Enter a valid password</p>
+              )}
+            </div>
           </div>
           <button className="mt-3 mb-3" type="submit">
             LOG IN
@@ -121,7 +174,9 @@ const Login = (props) => {
 
         <div className="noAccount text-center mt-5">
           <p>Don't have an account?</p>
-          <button className=" mt-5">SIGN UP FOR CODEBASIL</button>
+          <button className="mt-5" onClick={onSignupHandler}>
+            SIGN UP FOR CODEBASIL
+          </button>
         </div>
       </div>
     </Fragment>

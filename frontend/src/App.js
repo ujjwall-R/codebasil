@@ -13,7 +13,7 @@ const DUMMY = {
   codeChefUserName: "abc",
   following: [
     {
-      name: "ujjwal raj, husband of tulsi",
+      name: "ujjwal raj",
     },
   ],
 };
@@ -26,45 +26,53 @@ function App() {
 
   useEffect(() => {
     const storedLoginInfo = localStorage.getItem("isLoggedIn");
-    if(storedLoginInfo === "1")
-    {
+    if (storedLoginInfo === "1") {
       setIsLoggedIn(true);
     }
-  },[])
+  }, []);
 
   const loginHandler = async (email, password) => {
     console.log(email, password);
     const afterLoginData = await loginAction(email, password);
+    console.log(afterLoginData);
     if (afterLoginData.user) {
       setPersonalData(afterLoginData);
       setIsLoggedIn(true);
       setSignUp(false);
     }
   };
-  
+
   const logoutHandler = () => {
     localStorage.removeItem("isLoggedIn");
     setIsLoggedIn(false);
     setSignUp(false);
-  }
+  };
 
   const signupHandler = () => {
     setIsLoggedIn(true);
     setSignUp(true);
-  }
+  };
 
   const submitHandler = () => {
     setIsLoggedIn(false);
     setSignUp(false);
-  }
+  };
 
   return (
     <div>
       <AuthContext.Provider value={{ isloggedIn: isLoggedIn }}>
-        {!isLoggedIn && !signUp && <Login onLogin={loginHandler} onSignup={signupHandler} />}
-        {isLoggedIn && !signUp && <Navigation/>}
-        {isLoggedIn && !signUp && <Header name={DUMMY.name} onLogout={logoutHandler} userData={personalData} />}
-        {isLoggedIn && signUp && <Signup onSubmit={submitHandler}/>}
+        {!isLoggedIn && !signUp && (
+          <Login onLogin={loginHandler} onSignup={signupHandler} />
+        )}
+        {isLoggedIn && !signUp && <Navigation />}
+        {isLoggedIn && !signUp && (
+          <Header
+            name={DUMMY.name}
+            onLogout={logoutHandler}
+            userData={personalData}
+          />
+        )}
+        {isLoggedIn && signUp && <Signup onSubmit={submitHandler} />}
       </AuthContext.Provider>
     </div>
   );

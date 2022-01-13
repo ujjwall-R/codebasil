@@ -8,6 +8,8 @@ export const loginAction = async (email, password) => {
       },
     };
 
+    console.log(email, password);
+
     const { data } = await axios.post(
       "http://localhost:5000/users/login",
       { email, password },
@@ -33,15 +35,14 @@ export const getUserData = async (token) => {
       },
     };
 
-    console.log("hitting...");
+    // console.log("hitting...");
     const { data } = await axios.get("http://localhost:5000/users/me", config);
-    console.log("Hit");
+    // console.log("Hit");
 
     if (!data) {
       throw new Error("Error in Login");
       return;
     }
-    console.log(data);
     return data;
   } catch (error) {
     return error;

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import AuthContext from "./Auth-Context/Auth";
 import Login from "./Login/Login";
 import Signup from "./Sign-Up/Signup";
+import { loginAction } from "./actions/userActions";
 
 const DUMMY = {
   name: "Aditya Sinha",
@@ -18,6 +19,8 @@ const DUMMY = {
 };
 
 function App() {
+  const [personalData, setPersonalData] = useState({});
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [signUp, setSignUp] = useState(false);
 
@@ -29,11 +32,16 @@ function App() {
     }
   },[])
 
-  const loginHandler = (email, password) => {
-    localStorage.setItem("isLoggedIn", "1");
-    setIsLoggedIn(true);
-    setSignUp(false);
-  }
+  const loginHandler = async (email, password) => {
+    console.log(email, password);
+    const afterLoginData = await loginAction(email, password);
+    if (afterLoginData.user) {
+      setPersonalData(afterLoginData);
+      setIsLoggedIn(true);
+      setSignUp(false);
+    }
+  };
+  
   const logoutHandler = () => {
     localStorage.removeItem("isLoggedIn");
     setIsLoggedIn(false);
@@ -55,7 +63,7 @@ function App() {
       <AuthContext.Provider value={{ isloggedIn: isLoggedIn }}>
         {!isLoggedIn && !signUp && <Login onLogin={loginHandler} onSignup={signupHandler} />}
         {isLoggedIn && !signUp && <Navigation/>}
-        {isLoggedIn && !signUp && <Header name={DUMMY.name} onLogout={logoutHandler} />}
+        {isLoggedIn && !signUp && <Header name={DUMMY.name} onLogout={logoutHandler} userData={personalData} />}
         {isLoggedIn && signUp && <Signup onSubmit={submitHandler}/>}
       </AuthContext.Provider>
     </div>

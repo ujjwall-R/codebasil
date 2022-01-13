@@ -22,7 +22,7 @@ const Login = (props) => {
     if (action.type === "USER_INPUT") {
       return {
         valuePassword: action.val,
-        passwordIsValid: action.val.trim().length > 5,
+        passwordIsValid: action.val.trim().length >= 6,
       };
     }
     return {
@@ -71,6 +71,7 @@ const Login = (props) => {
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
+
     setEmailIsTouched(true);
     setPasswordIsTouched(true);
     if (formIsValid) {

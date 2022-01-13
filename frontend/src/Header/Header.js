@@ -1,16 +1,31 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import "./Header.css";
 import Profile from "../assets/aditya.jpg";
 import { startSession } from "mongoose";
+import { getUserData } from "../actions/userActions";
 const Header = (props) => {
   const [style, setStyle] = useState("flase");
+
+  const [name, setName] = useState("Loading...");
+
+  const [userData, setUserData] = useState({});
+  const [codeChefStar, setCodeChefStar] = useState("Loading...");
+
+  // console.log(props.userData.token);
+  useEffect(async () => {
+    if (Object.keys(props.userData).length !== 0) {
+      setName(props.userData.user.name);
+    }
+    const data = await getUserData(props.userData.token);
+    setCodeChefStar(data.codechefData.stars);
+  }, [name, codeChefStar]);
 
   const changeStyle = () => {
     setStyle(!style);
   };
 
   let stars = [];
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < codeChefStar; i++) {
     stars.push(
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -48,23 +63,27 @@ const Header = (props) => {
           />
           <div className="profile">
             <h1 className="text-light text-center mt-3">
-              <a href="index.html">{props.name}</a>
+              <a href="index.html">{name}</a>
             </h1>
             <div className="mt-4 mb-3 pt-1">
               <h3 className="text-center mt-5">
                 <a href="#">CODECHEF</a>
               </h3>
-              <div className="text-center">{stars}</div>
+              <div className="text-light text-center">{stars}</div>
 
               <h3 className="text-center mt-5">
                 <a href="#">CODEFORCES</a>
               </h3>
-              <div className="text-center">{stars}</div>
+              <div className="text-light text-center">
+                Currently Unavailable
+              </div>
 
               <h3 className="text-center mt-5">
                 <a href="#">HACKERRANK</a>
               </h3>
-              <div className="text-center">{stars}</div>
+              <div className="text-light text-center">
+                Currently Unavailable
+              </div>
             </div>
             <div className="logout text-center mt-5">
               <button onClick={props.onLogout}>LOG OUT</button>

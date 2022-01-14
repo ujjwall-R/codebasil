@@ -1,4 +1,4 @@
-import React, { Fragment, useReducer } from "react";
+import React, { Fragment, useReducer, useState } from "react";
 import "./Signup.css";
 const Signup = (props) => {
   const emailReducer = (state, action) => {
@@ -104,6 +104,11 @@ const Signup = (props) => {
     }
   );
 
+  //dummyStates
+  const [name, setName] = useState("Ayushi");
+  const [codechefId, setCodechefId] = useState("aditya_621");
+  //
+
   const [blurState, dispachedBlurState] = useReducer(blurReducer, {
     emailBlur: false,
     passwordBlur: false,
@@ -142,7 +147,19 @@ const Signup = (props) => {
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    props.onSubmit();
+    console.log(
+      emailState.valueEmail,
+      passwordState.valuePassword,
+      confirmPasswordState.valueConfirmPassword,
+      name,
+      codechefId
+    );
+    props.onSubmit(
+      emailState.valueEmail,
+      passwordState.valuePassword,
+      name,
+      codechefId
+    );
   };
   return (
     <Fragment>
@@ -182,9 +199,19 @@ const Signup = (props) => {
                 onBlur={emailValidator}
               ></input>
               {!emailState.emailIsValid && blurState.emailBlur && (
-                <p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-square-fill" viewBox="0 0 16 16">
-                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-              </svg> Enter a valid email</p>
+                <p>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-exclamation-square-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                  </svg>{" "}
+                  Enter a valid email
+                </p>
               )}
             </div>
           </div>
@@ -205,9 +232,19 @@ const Signup = (props) => {
                 onBlur={passwordValidator}
               ></input>
               {!passwordState.passwordIsValid && blurState.passwordBlur && (
-                <p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-square-fill" viewBox="0 0 16 16">
-                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-              </svg> Password is too short.</p>
+                <p>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-exclamation-square-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                  </svg>{" "}
+                  Password is too short.
+                </p>
               )}
             </div>
           </div>
@@ -229,16 +266,30 @@ const Signup = (props) => {
               ></input>
               {!confirmPasswordState.confirmPasswordIsValid &&
                 blurState.confirmPasswordBlur && (
-                  <p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-square-fill" viewBox="0 0 16 16">
-                  <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                </svg> password does't match the above password</p>
+                  <p>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-exclamation-square-fill"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                    </svg>{" "}
+                    password does't match the above password
+                  </p>
                 )}
             </div>
           </div>
           <div className="mt-4 mb-4">
             <label className="mb-2 mt-3">What should we call you?</label>
             <br />
-            <input placeholder="Enter a profile name." type="text" required></input>
+            <input
+              placeholder="Enter a profile name."
+              type="text"
+              required
+            ></input>
           </div>
           <div className="mt-4 mb-4">
             <label className="mb-2 mt-3">HackerRank User Id</label>

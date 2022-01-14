@@ -1,5 +1,35 @@
 import axios from "axios";
 
+export const signUpAction = async (email, password, name, codechefId) => {
+  try {
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+
+    console.log(email, password);
+
+    const { data } = await axios.post(
+      "http://localhost:5000/users",
+      {
+        email: email,
+        name: name,
+        password: password,
+        codechefUsername: codechefId,
+      },
+      config
+    );
+    if (!data) {
+      throw new Error("Error in SignUp");
+      return;
+    }
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const loginAction = async (email, password) => {
   try {
     const config = {
@@ -27,7 +57,6 @@ export const loginAction = async (email, password) => {
 
 export const getUserData = async (token) => {
   try {
-    console.log(token);
     const config = {
       headers: {
         "Content-type": "application/json",

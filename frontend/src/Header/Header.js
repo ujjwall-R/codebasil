@@ -17,6 +17,7 @@ const Header = (props) => {
       setName(props.userData.user.name);
     }
     const data = await getUserData(props.userData.token);
+    console.log("Scrapped data of loggedIn user", data);
     setCodeChefStar(data.codechefData.stars);
   }, [name, codeChefStar]);
 

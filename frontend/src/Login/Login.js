@@ -194,7 +194,13 @@ const Login = (props) => {
 
         <div className="noAccount text-center mt-5">
           <p>Don't have an account?</p>
-          <button className="mt-5" onClick={onSignupHandler}>
+          <button
+            className="mt-5"
+            onClick={
+              //move to signup page
+              onSignupHandler
+            }
+          >
             SIGN UP FOR CODEBASIL
           </button>
         </div>

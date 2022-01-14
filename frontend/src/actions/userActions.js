@@ -77,3 +77,30 @@ export const getUserData = async (token) => {
     return error;
   }
 };
+
+export const searchUserAction = async (token, emailToBeSearched) => {
+  try {
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    // console.log("hitting...");
+    const { data } = await axios.get(
+      "http://localhost:5000/users/search",
+      { email: emailToBeSearched },
+      config
+    );
+    // console.log("Hit");
+
+    if (!data) {
+      throw new Error("Error in Login");
+      return;
+    }
+    return data;
+  } catch (error) {
+    return error;
+  }
+};

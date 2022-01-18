@@ -1,0 +1,70 @@
+#Header2 {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 300px;
+  transition: all ease-in-out 0.5s;
+  z-index: 9997;
+  transition: all 0.5s;
+  padding: 0 15px;
+  background: rgb(0, 56, 78);
+}
+
+.following_Title h2 {
+  color: white;
+  font-weight: 200;
+  border-bottom: thin solid white;
+}
+.search_button button {
+  background: none;
+  border-radius: 7px;
+  color: white;
+  background-color: rgb(0, 82, 114);
+  border: 0.9px solid white;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.search_button button:hover {
+  background: none;
+  transition: 350ms;
+}
+
+@media (max-width: 1199px) {
+    #Header2 {
+      right: -300px;
+    }
+  }
+
+#Header2mob {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 300px;
+  transition: all ease-in-out 0.5s;
+  z-index: 9997;
+  transition: all 0.5s;
+  padding: 0 15px;
+  background: rgb(0, 56, 78);
+  overflow-y: auto;
+}
+
+@media (max-width: 1199px) {
+    #Header2mob {
+      right: 0px;
+    }
+  }
+.cross a{
+    color: white;
+}
+.following_names a {
+  text-decoration: none;
+}
+.following_names h4 {
+  color: white;
+  font-weight: 200;
+}
+
+

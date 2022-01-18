@@ -8,10 +8,11 @@
   z-index: 9997;
   transition: all 0.5s;
   padding: 0 15px;
-  background: rgb(0, 56, 78);
+  background-color: rgb(0, 56, 78);
+  border: 8px solid black;
 }
 
-.following_Title h2 {
+.following_Title h3 {
   color: white;
   font-weight: 200;
   border-bottom: thin solid white;
@@ -49,6 +50,7 @@
   padding: 0 15px;
   background: rgb(0, 56, 78);
   overflow-y: auto;
+  border: 8px solid black;
 }
 
 @media (max-width: 1199px) {
@@ -62,7 +64,7 @@
 .following_names a {
   text-decoration: none;
 }
-.following_names h4 {
+.following_names h5 {
   color: white;
   font-weight: 200;
 }

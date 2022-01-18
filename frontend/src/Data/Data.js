@@ -7,7 +7,7 @@ const Data = () => {
         <div className="container data mt-5 pt-5 pb-5">
           <div className="row">
             <div className="codechef col-12 mt-3 mb-4">
-              <h2>CODECHEF</h2>
+              <h3>CODECHEF</h3>
             </div>
           </div>
           <div className="row">
@@ -42,7 +42,7 @@ const Data = () => {
         <div className="container data mt-4 pb-5 mb-5">
           <div className="row">
             <div className="codechef col-12 mt-3 mb-4">
-              <h2>CODEFORCES</h2>
+              <h3>CODEFORCES</h3>
             </div>
           </div>
           <div className="row">
@@ -76,7 +76,7 @@ const Data = () => {
         <div className="container data mt-4 pb-5">
           <div className="row">
             <div className="codechef col-12 mt-3 mb-4">
-              <h2>HACKERRANK</h2>
+              <h3>HACKERRANK</h3>
             </div>
           </div>
           <div className="row">

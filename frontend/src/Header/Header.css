@@ -10,6 +10,8 @@
   padding: 0 15px;
   background: rgb(0, 56, 78);
   overflow-y: auto;
+  border: 8px solid black;
+  
 }
 .profile h1 {
   font-size: 24px;
@@ -26,8 +28,8 @@
   text-decoration: none;
   font-weight: 300;
 }
-.profile h3 a,
-.profile h3 a:hover {
+.profile h4 a,
+.profile h4 a:hover {
   color: #fff;
   text-decoration: none;
   font-weight: 200;
@@ -127,6 +129,7 @@
   padding: 0 15px;
   background: rgb(0, 56, 78);
   overflow-y: auto;
+  border: thick solid black;
 }
 
 @media (max-width: 1199px) {

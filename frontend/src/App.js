@@ -5,24 +5,15 @@ import AuthContext from "./Auth-Context/Auth";
 import Login from "./Login/Login";
 import Signup from "./Sign-Up/Signup";
 import { loginAction, signUpAction } from "./actions/userActions";
-
-const DUMMY = {
-  name: "Aditya Sinha",
-  email: "adityasinha6060@gmail.com",
-  password: "aditya",
-  codeChefUserName: "abc",
-  following: [
-    {
-      name: "ujjwal raj",
-    },
-  ],
-};
+import Following from "./Following/Following";
+import Data from "./Data/Data";
 
 function App() {
   const [personalData, setPersonalData] = useState({});
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [signUp, setSignUp] = useState(false);
+  const [following, setFollowing] = useState(false);
 
   useEffect(() => {
     const storedLoginInfo = localStorage.getItem("isLoggedIn");
@@ -46,6 +37,10 @@ function App() {
     localStorage.removeItem("isLoggedIn");
     setIsLoggedIn(false);
     setSignUp(false);
+  };
+
+  const followingClickHandler = (set) => {
+    setFollowing(set);
   };
 
   const signupHandler = async (email, password, name, codechefId) => {
@@ -75,14 +70,15 @@ function App() {
         {!isLoggedIn && !signUp && (
           <Login onLogin={loginHandler} onSignup={directToSignup} />
         )}
-        {isLoggedIn && !signUp && <Navigation />}
         {isLoggedIn && !signUp && (
-          <Header
-            name={DUMMY.name}
-            onLogout={logoutHandler}
-            userData={personalData}
-          />
+          <Navigation onClickFollowing={followingClickHandler} />
         )}
+        {isLoggedIn && !signUp && (
+          <Header onLogout={logoutHandler} userData={personalData} />
+        )}
+        {isLoggedIn && !signUp && <Following followingClicked={following} />}
+        {isLoggedIn && !signUp && <Data />}
+
         {isLoggedIn && signUp && <Signup onSubmit={signupHandler} />}
       </AuthContext.Provider>
     </div>

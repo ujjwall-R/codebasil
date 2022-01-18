@@ -56,7 +56,7 @@ const Header = (props) => {
         </div>
       </button>
       <header id={style ? "mobHeader" : "header"}>
-        <div className="d-flex flex-column">
+        <div className="d-flex flex-column mt-2">
           <img
             src={Profile}
             className="img-fluid rounded-circle mt-4 ms-auto me-auto"
@@ -67,21 +67,21 @@ const Header = (props) => {
               <a href="index.html">{name}</a>
             </h1>
             <div className="mt-4 mb-3 pt-1">
-              <h3 className="text-center mt-5">
+              <h4 className="text-center mt-5">
                 <a href="#">CODECHEF</a>
-              </h3>
+              </h4>
               <div className="text-light text-center">{stars}</div>
 
-              <h3 className="text-center mt-5">
+              <h4 className="text-center mt-5">
                 <a href="#">CODEFORCES</a>
-              </h3>
+              </h4>
               <div className="text-light text-center">
                 Currently Unavailable
               </div>
 
-              <h3 className="text-center mt-5">
+              <h4 className="text-center mt-5">
                 <a href="#">HACKERRANK</a>
-              </h3>
+              </h4>
               <div className="text-light text-center">
                 Currently Unavailable
               </div>

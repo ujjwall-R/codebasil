@@ -25,7 +25,7 @@ const Following = (props) => {
   return (
     <Fragment>
       <header id={followingIsClicked ? "Header2mob" : "Header2"}>
-        <div className="cross mt-2 d-xl-none">
+        <div className="cross mt-3 d-xl-none">
           <a href="#" onClick={onCrossClickHandler}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -46,9 +46,9 @@ const Following = (props) => {
             </svg>
           </a>
         </div>
-        <div className="d-flex flex-column">
+        <div className="d-flex flex-column mt-2">
           <div className="following_Title m-xl-2 text-center">
-            <h2 className="pb-2">
+            <h3 className="pb-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="43"
@@ -60,7 +60,7 @@ const Following = (props) => {
                 <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z" />
               </svg>{" "}
               Following
-            </h2>
+            </h3>
           </div>
           <div className="input-group search mt-1">
             <div className="form-outline serach_form ms-auto me-auto">
@@ -73,7 +73,7 @@ const Following = (props) => {
           <div className="following_names mt-3">
             <div className="mb-2 mt-2">
               <a href="#">
-              <h4>
+              <h5>
                 {" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -86,12 +86,12 @@ const Following = (props) => {
                   <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                 </svg>{" "}
                 Aditya Sinha
-              </h4>
+              </h5>
               </a>
             </div>
             <div className="mt-2 mb-2">
               <a href="#">
-                <h4>
+                <h5>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -103,7 +103,7 @@ const Following = (props) => {
                     <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                   </svg>{" "}
                   Ujjwal Raj{" "}
-                </h4>
+                </h5>
               </a>
             </div>
           </div>

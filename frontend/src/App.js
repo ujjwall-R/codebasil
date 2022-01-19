@@ -15,12 +15,18 @@ function App() {
   const [signUp, setSignUp] = useState(false);
   const [following, setFollowing] = useState(false);
 
+  const [codeChefData, setCodeChefData] = useState({});
+
   useEffect(() => {
     const storedLoginInfo = localStorage.getItem("isLoggedIn");
     if (storedLoginInfo === "1") {
       setIsLoggedIn(true);
     }
   }, []);
+
+  const ccfDataLoader = (data) => {
+    setCodeChefData(data);
+  };
 
   const loginHandler = async (email, password) => {
     console.log(email, password);
@@ -74,10 +80,14 @@ function App() {
           <Navigation onClickFollowing={followingClickHandler} />
         )}
         {isLoggedIn && !signUp && (
-          <Header onLogout={logoutHandler} userData={personalData} />
+          <Header
+            onLogout={logoutHandler}
+            userData={personalData}
+            ccfDataLoader={ccfDataLoader}
+          />
         )}
         {isLoggedIn && !signUp && <Following followingClicked={following} />}
-        {isLoggedIn && !signUp && <Data />}
+        {isLoggedIn && !signUp && <Data data={codeChefData} />}
 
         {isLoggedIn && signUp && <Signup onSubmit={signupHandler} />}
       </AuthContext.Provider>

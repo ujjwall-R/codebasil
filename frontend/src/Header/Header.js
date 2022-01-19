@@ -18,6 +18,9 @@ const Header = (props) => {
     }
     const data = await getUserData(props.userData.token);
     console.log("Scrapped data of loggedIn user", data);
+
+    props.ccfDataLoader(data);
+
     setCodeChefStar(data.codechefData.stars);
   }, [name, codeChefStar]);
 

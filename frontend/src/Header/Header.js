@@ -22,7 +22,7 @@ const Header = (props) => {
     props.ccfDataLoader(data);
 
     setCodeChefStar(data.codechefData.stars);
-  }, [name, codeChefStar]);
+  }, [codeChefStar]);
 
   const changeStyle = () => {
     setStyle(!style);

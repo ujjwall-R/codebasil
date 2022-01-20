@@ -4,7 +4,7 @@ const Data = (props) => {
   const data = props.data;
 
   const codechefData = data.codechefData;
-  console.log(codechefData);
+  // console.log(codechefData);
 
   return (
     <Fragment>

@@ -4,9 +4,10 @@ import React, { useState, useEffect } from "react";
 import AuthContext from "./Auth-Context/Auth";
 import Login from "./Login/Login";
 import Signup from "./Sign-Up/Signup";
-import { loginAction, signUpAction } from "./actions/userActions";
+import { loginAction, logoutAction, signUpAction } from "./actions/userActions";
 import Following from "./Following/Following";
 import Data from "./Data/Data";
+import { data } from "cheerio/lib/api/attributes";
 
 function App() {
   const [personalData, setPersonalData] = useState({});
@@ -15,14 +16,12 @@ function App() {
   const [signUp, setSignUp] = useState(false);
   const [following, setFollowing] = useState(false);
 
-  const [codeChefData, setCodeChefData] = useState({
+  const loadingData = {
     user: {
-      _id: "61d6ecd8863ff15089d86bcf",
-      name: "Ujjwal1",
-      email: "example@example.com",
-      codechefUsername: "abhishek_987",
+      name: "Loading...",
+      email: "Loading...",
+      codechefUsername: "Loading...",
       following: [],
-      __v: 51,
     },
     codechefData: {
       username: "Loading...",
@@ -32,7 +31,9 @@ function App() {
       stars: "Loading...",
       recentActivities: ["Loading..."],
     },
-  });
+  };
+
+  const [codeChefData, setCodeChefData] = useState(loadingData);
 
   useEffect(() => {
     const storedLoginInfo = localStorage.getItem("isLoggedIn");
@@ -56,10 +57,20 @@ function App() {
     }
   };
 
-  const logoutHandler = () => {
-    localStorage.removeItem("isLoggedIn");
-    setIsLoggedIn(false);
-    setSignUp(false);
+  const logoutHandler = async () => {
+    console.log("Logout Attempted!");
+
+    const tkn = personalData.token;
+    console.log(tkn);
+
+    const dataLogOut = await logoutAction(tkn);
+    console.log(dataLogOut);
+    if (dataLogOut.message) {
+      localStorage.removeItem("isLoggedIn");
+      setIsLoggedIn(false);
+      setSignUp(false);
+      setCodeChefData(loadingData);
+    }
   };
 
   const followingClickHandler = (set) => {

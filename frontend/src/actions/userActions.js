@@ -57,6 +57,7 @@ export const loginAction = async (email, password) => {
 
 export const getUserData = async (token) => {
   try {
+    console.log(token);
     const config = {
       headers: {
         "Content-type": "application/json",
@@ -70,6 +71,33 @@ export const getUserData = async (token) => {
 
     if (!data) {
       throw new Error("Error in Login");
+      return;
+    }
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const logoutAction = async (token) => {
+  try {
+    console.log(token);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    // console.log("hitting...");
+    const { data } = await axios.post(
+      "http://localhost:5000/users/logout",
+      null,
+      config
+    );
+    // console.log("Hit");
+
+    if (!data.message) {
+      throw new Error("Error in Logout");
       return;
     }
     return data;

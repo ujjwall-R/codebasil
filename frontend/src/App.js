@@ -15,7 +15,24 @@ function App() {
   const [signUp, setSignUp] = useState(false);
   const [following, setFollowing] = useState(false);
 
-  const [codeChefData, setCodeChefData] = useState({});
+  const [codeChefData, setCodeChefData] = useState({
+    user: {
+      _id: "61d6ecd8863ff15089d86bcf",
+      name: "Ujjwal1",
+      email: "example@example.com",
+      codechefUsername: "abhishek_987",
+      following: [],
+      __v: 51,
+    },
+    codechefData: {
+      username: "Loading...",
+      profession: "Loading...",
+      institution: "Loading....",
+      location: "Loading...",
+      stars: "Loading...",
+      recentActivities: ["Loading..."],
+    },
+  });
 
   useEffect(() => {
     const storedLoginInfo = localStorage.getItem("isLoggedIn");

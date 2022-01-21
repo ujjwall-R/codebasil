@@ -16,6 +16,15 @@ function App() {
   const [signUp, setSignUp] = useState(false);
   const [following, setFollowing] = useState(false);
 
+  // const x = localStorage.getItem("userInfo");
+
+  // if (x) {
+  //   console.log(x);
+  //   setPersonalData(x);
+  //   setIsLoggedIn(true);
+  //   setSignUp(false);
+  // }
+
   const loadingData = {
     user: {
       name: "Loading...",
@@ -36,9 +45,20 @@ function App() {
   const [codeChefData, setCodeChefData] = useState(loadingData);
 
   useEffect(() => {
-    const storedLoginInfo = localStorage.getItem("isLoggedIn");
-    if (storedLoginInfo === "1") {
+    const storedLoginInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const scrappedCodechefData = JSON.parse(
+      localStorage.getItem("scrappedCodechefData")
+    );
+    console.log(scrappedCodechefData);
+    if (storedLoginInfo) {
+      // setIsLoggedIn(true);
+      if (scrappedCodechefData.codechefData) {
+        setCodeChefData(scrappedCodechefData);
+        // console.log(scrappedCodechefData);
+      }
+      setPersonalData(storedLoginInfo);
       setIsLoggedIn(true);
+      setSignUp(false);
     }
   }, []);
 
@@ -51,6 +71,7 @@ function App() {
     const afterLoginData = await loginAction(email, password);
 
     if (afterLoginData.user) {
+      localStorage.setItem("userInfo", JSON.stringify(afterLoginData));
       setPersonalData(afterLoginData);
       setIsLoggedIn(true);
       setSignUp(false);
@@ -66,6 +87,7 @@ function App() {
     const dataLogOut = await logoutAction(tkn);
     console.log(dataLogOut);
     if (dataLogOut.message) {
+      localStorage.removeItem("userInfo");
       localStorage.removeItem("isLoggedIn");
       setIsLoggedIn(false);
       setSignUp(false);

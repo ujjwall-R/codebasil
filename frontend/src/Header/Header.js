@@ -17,7 +17,7 @@ const Header = (props) => {
       setName(props.userData.user.name);
     }
     const data = await getUserData(props.userData.token);
-    console.log("Scr2apped data of loggedIn user", data);
+    // console.log("Scr2apped data of loggedIn user", data);
 
     localStorage.setItem("scrappedCodechefData", JSON.stringify(data));
 

@@ -49,7 +49,7 @@ function App() {
     const scrappedCodechefData = JSON.parse(
       localStorage.getItem("scrappedCodechefData")
     );
-    console.log(scrappedCodechefData);
+    // console.log(scrappedCodechefData);
     if (storedLoginInfo) {
       // setIsLoggedIn(true);
       if (scrappedCodechefData.codechefData) {
@@ -67,7 +67,7 @@ function App() {
   };
 
   const loginHandler = async (email, password) => {
-    console.log(email, password);
+    // console.log(email, password);
     const afterLoginData = await loginAction(email, password);
 
     if (afterLoginData.user) {
@@ -79,10 +79,10 @@ function App() {
   };
 
   const logoutHandler = async () => {
-    console.log("Logout Attempted!");
+    // console.log("Logout Attempted!");
 
     const tkn = personalData.token;
-    console.log(tkn);
+    // console.log(tkn);
 
     const dataLogOut = await logoutAction(tkn);
     console.log(dataLogOut);

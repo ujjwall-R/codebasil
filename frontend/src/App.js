@@ -89,6 +89,7 @@ function App() {
     if (dataLogOut.message) {
       localStorage.removeItem("userInfo");
       localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("scrappedCodechefData");
       setIsLoggedIn(false);
       setSignUp(false);
       setCodeChefData(loadingData);

@@ -1,9 +1,11 @@
 import React, { Fragment, useState, useEffect } from "react";
+import { searchUserAction } from "../actions/userActions";
 import "./Following.css";
 
 const Following = (props) => {
   const [followingIsClicked, setFollowingIsClicked] = useState(false);
   const [inputData, setInputData] = useState("");
+  const [afterSearching, setAfterSearching] = useState("");
 
   useEffect(() => {
     setFollowingIsClicked(true);
@@ -17,9 +19,19 @@ const Following = (props) => {
     setInputData(event.target.value);
   }
 
-  const onSubmitHandler = (event) => {
+  const onSubmitHandler = async (event) => {
     event.preventDefault();
+    searchedUser(inputData);
+    console.log(inputData);
     setInputData("");
+  }
+
+  const searchedUser = async (data) => {
+    console.log(data);
+    const foundUser = await searchUserAction(props.userData.token, data);
+    console.log(foundUser)
+    setAfterSearching(foundUser);
+    return;
   }
 
   return (
@@ -102,7 +114,6 @@ const Following = (props) => {
                   >
                     <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                   </svg>{" "}
-                  Ujjwal Raj{" "}
                 </h5>
               </a>
             </div>

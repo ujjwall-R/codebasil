@@ -48,6 +48,20 @@ router.post("/users/login", async (req, res) => {
   }
 });
 
+router.post("/users/reset", async (req, res) => {
+  try {
+    const user = await User.findByEmail(
+      req.body.email
+    );
+    user.password = req.body.password;
+    user.save();
+    res.status(200).send("success!");
+  } catch(error) {
+    console.log(error);
+    res.status(400).send({error: error});
+  }
+});
+
 //@description Update user profile
 //@route PUT /users/profile
 //@access Private

@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
+import { findOne } from "domutils";
 
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true, trim: true },
@@ -56,6 +57,15 @@ userSchema.statics.findByCredentials = async (email, password) => {
 
   return user;
 };
+
+userSchema.statics.findByEmail = async (email) => {
+  const user = await User.findOne({ email });
+
+  if(!user) {
+    throw new Error("Email not found!");
+  }
+  return user;
+}
 
 //hashing password before saving
 userSchema.pre("save", async function (next) {

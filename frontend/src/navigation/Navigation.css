@@ -21,3 +21,12 @@
 .navbar ul li a h4 {
     font-weight: 340;
 }
+@media (max-width: 499px) {
+    .navbar ul li a h4{
+        font-size: 15px;
+    }
+    .navbar ul li a h4:hover {
+        font-size: 20px;
+        transition: 0.15s;
+    }
+}

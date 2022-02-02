@@ -70,7 +70,6 @@ export const getUserData = async (token) => {
 
     if (!data) {
       throw new Error("Error in Login");
-      return;
     }
     return data;
   } catch (error) {
@@ -97,8 +96,25 @@ export const searchUserAction = async (token, emailToBeSearched) => {
 
     if (!data) {
       throw new Error("Error in Login");
-      return;
     }
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const resetPassword = async (email, passwordToBeChanged) => {
+  try {
+    const config = {
+      "content-type": "application/json",
+    };
+    console.log(email, passwordToBeChanged);
+
+    const { data } = await axios.post(
+      "http://localhost:5000/users/reset",
+      { email: email, password: passwordToBeChanged },
+      config
+    );
     return data;
   } catch (error) {
     return error;

@@ -7,6 +7,7 @@ import Signup from "./Sign-Up/Signup";
 import { loginAction, signUpAction } from "./actions/userActions";
 import Following from "./Following/Following";
 import Data from "./Data/Data";
+import PasswordReset from "./forgot-password/PasswordReset";
 
 function App() {
   const [personalData, setPersonalData] = useState({});
@@ -14,6 +15,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [signUp, setSignUp] = useState(false);
   const [following, setFollowing] = useState(false);
+  const [forgotPassword, setForgotPassword] = useState(false);
 
   useEffect(() => {
     const storedLoginInfo = localStorage.getItem("isLoggedIn");
@@ -64,22 +66,41 @@ function App() {
     setSignUp(true);
   };
 
+  const directToPasswordReset = () => {
+    setIsLoggedIn(false);
+    setIsLoggedIn(false);
+    setForgotPassword(true);
+    console.log("hit2");
+  };
+
   return (
     <div>
       <AuthContext.Provider value={{ isloggedIn: isLoggedIn }}>
-        {!isLoggedIn && !signUp && (
-          <Login onLogin={loginHandler} onSignup={directToSignup} />
+        {!isLoggedIn && !signUp && !forgotPassword && (
+          <Login
+            onLogin={loginHandler}
+            onSignup={directToSignup}
+            onForgotYourPassword={directToPasswordReset}
+          />
         )}
-        {isLoggedIn && !signUp && (
+
+        {!isLoggedIn && !signUp && forgotPassword && <PasswordReset />}
+
+        {isLoggedIn && !signUp && !forgotPassword && (
           <Navigation onClickFollowing={followingClickHandler} />
         )}
-        {isLoggedIn && !signUp && (
+        {isLoggedIn && !signUp && !forgotPassword && (
           <Header onLogout={logoutHandler} userData={personalData} />
         )}
-        {isLoggedIn && !signUp && <Following followingClicked={following} />}
-        {isLoggedIn && !signUp && <Data />}
 
-        {isLoggedIn && signUp && <Signup onSubmit={signupHandler} />}
+        {isLoggedIn && !signUp && !forgotPassword && (
+          <Following followingClicked={following} userData={personalData} />
+        )}
+        {isLoggedIn && !signUp && !forgotPassword && <Data />}
+
+        {isLoggedIn && signUp && !forgotPassword && (
+          <Signup onSubmit={signupHandler} />
+        )}
       </AuthContext.Provider>
     </div>
   );

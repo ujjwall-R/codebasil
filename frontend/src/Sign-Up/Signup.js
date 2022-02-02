@@ -164,12 +164,12 @@ const Signup = (props) => {
   return (
     <Fragment>
       <div className="signup">
-        <div className="signup_header text-center mb-5 mt-3">
+        <div className="signup_header text-center mb-5 pt-3 pb-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="35"
             height="35"
-            fill="currentColor"
+            fill="#fff"
             className="bi bi-file-code-fill"
             viewBox="0 0 16 16"
           >
@@ -177,7 +177,7 @@ const Signup = (props) => {
           </svg>
           <h1>Codebasil</h1>
         </div>
-        <div className="header_description text-center">
+        <div className="header_description text-center mb-5">
           <h3>Sign Up For Free</h3>
         </div>
         <form className="text-center mb-5" onSubmit={onSubmitHandler}>

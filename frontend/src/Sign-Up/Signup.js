@@ -1,6 +1,9 @@
 import React, { Fragment, useReducer, useState } from "react";
 import "./Signup.css";
+import Modal from "../Modal/Modal"
 const Signup = (props) => {
+
+  const [sendOtp, setSendOtp] = useState(false);
   const emailReducer = (state, action) => {
     if (action.type === "USER_EMAIL") {
       return {
@@ -145,8 +148,14 @@ const Signup = (props) => {
     dispachedBlurState({ type: "CONFIRM_PASSWORD_BLUR" });
   };
 
+  const otpVerified = () => {
+    setSendOtp(false);
+  }
+
   const onSubmitHandler = (event) => {
     event.preventDefault();
+    
+    
     console.log(
       emailState.valueEmail,
       passwordState.valuePassword,
@@ -160,6 +169,7 @@ const Signup = (props) => {
       name,
       codechefId
     );
+    setSendOtp(true);
   };
   return (
     <Fragment>
@@ -288,7 +298,6 @@ const Signup = (props) => {
             <input
               placeholder="Enter a profile name."
               type="text"
-              required
             ></input>
           </div>
           <div className="mt-4 mb-4">
@@ -307,10 +316,11 @@ const Signup = (props) => {
             <input placeholder="Codechef user id."></input>
           </div>
           <button className="mt-3 mb-3" type="submit">
-            SIGN UP
+            SEND OTP
           </button>
         </form>
       </div>
+      {sendOtp && <Modal onOtpVerified={otpVerified} emailVerify={emailState.valueEmail} />}
     </Fragment>
   );
 };

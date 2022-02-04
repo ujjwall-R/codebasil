@@ -103,16 +103,57 @@ export const searchUserAction = async (token, emailToBeSearched) => {
   }
 };
 
-export const resetPassword = async (email, passwordToBeChanged) => {
+export const getOtp = async (email) => {
   try {
     const config = {
-      "content-type": "application/json",
+      headers: {
+        "content-type": "application/json",
+      },
+    };
+    console.log(email);
+
+    const { data } = await axios.post(
+      "http://localhost:5000/users/reset/getotp",
+      { email: email },
+      config
+    );
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const resetPassword = async (email, passwordToBeChanged, otp) => {
+  try {
+    const config = {
+      headers: {
+        "content-type": "application/json",
+      },
     };
     console.log(email, passwordToBeChanged);
 
     const { data } = await axios.post(
       "http://localhost:5000/users/reset",
-      { email: email, password: passwordToBeChanged },
+      { email: email, password: passwordToBeChanged, otp: otp },
+      config
+    );
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const otpVarification = async (email, otp) => {
+  try {
+    const config = {
+      headers: {
+        "content-type": "application/json",
+      },
+    };
+
+    const { data } = await axios.post(
+      "http://localhost:5000/users/otp",
+      { email: email, otp: otp },
       config
     );
     return data;

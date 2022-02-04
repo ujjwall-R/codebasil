@@ -1,9 +1,11 @@
 import React, { Fragment, useState } from "react";
-import { resetPassword } from "../actions/userActions";
 import "./PasswordReset.css";
+import { getOtp } from "../actions/userActions";
+import Modal from "../Modal/ModalAtPasswordReset";
 const PasswordReset = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [modal, setModal] = useState(false);
 
   const onEmailChange = (event) => {
     setEmail(event.target.value);
@@ -13,9 +15,13 @@ const PasswordReset = () => {
     setPassword(event.target.value);
   };
 
-  const onResetPassword = async () => {
-    const resetHandler = await resetPassword(email, password);
-  };
+  const onClickSendOtp = async (event) => {
+    event.preventDefault();
+    console.log(email);
+    const getOTP = await getOtp(email);
+    setModal(true);
+  }
+
   return (
     <Fragment>
       <div className="reset">
@@ -42,7 +48,7 @@ const PasswordReset = () => {
         </p>
       </div>
       <div className="password_reset text-center">
-        <form onSubmit={onResetPassword}>
+        <form onSubmit={onClickSendOtp}>
           <label className="mb-1">Email</label>
           <input
             type="email"
@@ -56,10 +62,11 @@ const PasswordReset = () => {
             onChange={onPasswordChange}
           ></input>
           <button className="mt-4" type="submit">
-            SEND
+            SEND OTP
           </button>
         </form>
       </div>
+      {modal && <Modal emailVerify={email} newPassword={password} />}
     </Fragment>
   );
 };

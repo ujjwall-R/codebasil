@@ -57,7 +57,7 @@ function App() {
     if (afterLoginData.user) {
       setPersonalData(afterLoginData);
       setIsLoggedIn(true);
-      setSignUp(false);
+      setSignUp(true);
     }
   };
 

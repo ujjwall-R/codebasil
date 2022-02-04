@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import { findOne } from "domutils";
 
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true, trim: true },
@@ -18,6 +17,10 @@ const userSchema = new mongoose.Schema({
   codechefUsername: { type: String, required: true, trim: true },
   following: [],
   tokens: [{ token: { type: String, require: true } }],
+  varified : {
+    type: Boolean,
+    default: false,
+  }
 });
 
 //generating authentication token

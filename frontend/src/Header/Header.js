@@ -17,9 +17,14 @@ const Header = (props) => {
       setName(props.userData.user.name);
     }
     const data = await getUserData(props.userData.token);
-    console.log("Scrapped data of loggedIn user", data);
+    // console.log("Scr2apped data of loggedIn user", data);
+
+    localStorage.setItem("scrappedCodechefData", JSON.stringify(data));
+
+    props.ccfDataLoader(data);
+
     setCodeChefStar(data.codechefData.stars);
-  }, [name, codeChefStar]);
+  }, [codeChefStar]);
 
   const changeStyle = () => {
     setStyle(!style);

@@ -119,6 +119,14 @@ const Signup = (props) => {
     dispachedEmail({ type: "USER_EMAIL", val: event.target.value });
   };
 
+  const ccUnChangeHandler = (event) => {
+    // console.log("This one", event.target.value);
+    setCodechefId(event.target.value);
+  };
+  const nameChangeHandler = (event) => {
+    setName(event.target.value);
+  };
+
   const emailValidator = () => {
     dispachedEmail({ type: "EMAIL_VALID" });
     dispachedBlurState({ type: "EMAIL_BLUR" });
@@ -286,6 +294,7 @@ const Signup = (props) => {
             <label className="mb-2 mt-3">What should we call you?</label>
             <br />
             <input
+              onChange={nameChangeHandler}
               placeholder="Enter a profile name."
               type="text"
               required
@@ -304,7 +313,10 @@ const Signup = (props) => {
           <div className="mt-4 mb-4">
             <label className="mb-2 mt-3">Codechef User Id</label>
             <br />
-            <input placeholder="Codechef user id."></input>
+            <input
+              onChange={ccUnChangeHandler}
+              placeholder="Codechef user id."
+            ></input>
           </div>
           <button className="mt-3 mb-3" type="submit">
             SIGN UP

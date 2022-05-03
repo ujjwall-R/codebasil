@@ -76,7 +76,7 @@ const Login = (props) => {
     setPasswordIsTouched(true);
     if (formIsValid) {
       props.onLogin(emailState.valueEmail, passwordState.valuePassword);
-      console.log(emailState.email);
+      // console.log(emailState.email);
     }
   };
 

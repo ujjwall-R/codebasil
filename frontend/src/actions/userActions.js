@@ -38,7 +38,7 @@ export const loginAction = async (email, password) => {
       },
     };
 
-    console.log(email, password);
+    // console.log(email, password);
 
     const { data } = await axios.post(
       "http://localhost:5000/users/login",
@@ -57,7 +57,7 @@ export const loginAction = async (email, password) => {
 
 export const getUserData = async (token) => {
   try {
-    console.log(token);
+    // console.log(token);
     const config = {
       headers: {
         "Content-type": "application/json",
@@ -81,7 +81,7 @@ export const getUserData = async (token) => {
 
 export const logoutAction = async (token) => {
   try {
-    console.log(token);
+    // console.log(token);
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,

@@ -30,7 +30,7 @@ function App() {
       name: "Loading...",
       email: "Loading...",
       codechefUsername: "Loading...",
-      following: [],
+      following: ["Loading..."],
     },
     codechefData: {
       username: "Loading...",
@@ -54,7 +54,7 @@ function App() {
       // setIsLoggedIn(true);
       if (scrappedCodechefData.codechefData) {
         setCodeChefData(scrappedCodechefData);
-        // console.log(scrappedCodechefData);
+        console.log(scrappedCodechefData);
       }
       setPersonalData(storedLoginInfo);
       setIsLoggedIn(true);
@@ -110,6 +110,7 @@ function App() {
     );
     console.log(afterLoginData);
     if (afterLoginData.user) {
+      localStorage.setItem("userInfo", JSON.stringify(afterLoginData));
       setPersonalData(afterLoginData);
       setIsLoggedIn(true);
       setSignUp(false);
@@ -137,7 +138,12 @@ function App() {
             ccfDataLoader={ccfDataLoader}
           />
         )}
-        {isLoggedIn && !signUp && <Following followingClicked={following} />}
+        {isLoggedIn && !signUp && (
+          <Following
+            followingClicked={following}
+            followingData={codeChefData.user.following}
+          />
+        )}
         {isLoggedIn && !signUp && <Data data={codeChefData} />}
 
         {isLoggedIn && signUp && <Signup onSubmit={signupHandler} />}

@@ -148,7 +148,7 @@ router.post("/users/follow/:email", auth, async (req, res) => {
   try {
     const userToFollow = await User.findOne({ email: req.params.email });
     const user = req.user;
-
+    console.log("This", user);
     if (!userToFollow) {
       throw new Error("No such user exist!");
     }

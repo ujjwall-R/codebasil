@@ -66,8 +66,8 @@ function App() {
     }
   }, []);
 
-  const ccfDataLoader = async (data) => {
-    await setCodeChefData(data);
+  const ccfDataLoader = (data) => {
+    setCodeChefData(data);
   };
 
   const loginHandler = async (email, password) => {

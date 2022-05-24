@@ -19,7 +19,7 @@ const Following = (props) => {
     setInputData(event.target.value);
   }
 
-  const onSubmitHandler = async (event) => {
+  const onSubmitHandler = (event) => {
     event.preventDefault();
     searchedUser(inputData);
     setInputData("");

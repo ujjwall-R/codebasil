@@ -105,17 +105,16 @@ export const logoutAction = async (token) => {
   }
 };
 
-export const searchUserAction = async (token, emailToBeSearched) => {
+export const searchUserAction = async (emailToBeSearched) => {
   try {
     const config = {
       headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${token}`,
+        "Content-type": "application/json"
       },
     };
 
     // console.log("hitting...");
-    const { data } = await axios.get(
+    const { data } = await axios.post(
       "http://localhost:5000/users/search",
       { email: emailToBeSearched },
       config

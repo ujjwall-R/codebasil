@@ -5,6 +5,7 @@ import { getRawData } from "../codechef.js";
 import VarificationOTP from "../models/VarificationOTP.js";
 import { generateOTP } from "../utils.js/otpGenerator.js";
 import bcrypt from "bcryptjs";
+import { sendEmail } from "../emails/sendgrid.js";
 
 const router = new express.Router();
 
@@ -29,6 +30,8 @@ router.post("/users", async (req, res) => {
     owner: user._id,
     token: OTP,
   });
+
+  sendEmail(user.email, OTP);
 
   await varificationOTP.save();
 
@@ -99,6 +102,9 @@ router.post("/users/reset/getotp", async (req, res) => {
       owner: user._id,
       token: OTP,
     });
+
+    sendEmail(user.email, OTP);
+    
     await varificationOTP.save();
     res.status(200).send("sucess");
   } catch (error) {
@@ -196,16 +202,20 @@ router.get("/users/me", auth, async (req, res) => {
 //@description get/search user by email
 //@route GET /users/search
 //@access Public
-router.get("/users/search", async (req, res) => {
+router.post("/users/search", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
 
     if (!user) {
       throw new Error("User not found!");
     }
+
+    console.log(user);
     const codechefData = await getRawData(user.codechefUsername);
+    const userName = user.name;
 
     const userData = [
+      {name: userName},
       { codechefData: codechefData },
       { codeforcesData: {} },
       { hackerrankData: {} },

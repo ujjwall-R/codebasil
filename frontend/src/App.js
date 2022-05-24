@@ -58,7 +58,7 @@ function App() {
       // setIsLoggedIn(true);
       if (scrappedCodechefData.codechefData) {
         setCodeChefData(scrappedCodechefData);
-        // console.log(scrappedCodechefData);
+        console.log(scrappedCodechefData);
       }
       setPersonalData(storedLoginInfo);
       setIsLoggedIn(true);
@@ -66,8 +66,8 @@ function App() {
     }
   }, []);
 
-  const ccfDataLoader = (data) => {
-    setCodeChefData(data);
+  const ccfDataLoader = async (data) => {
+    await setCodeChefData(data);
   };
 
   const loginHandler = async (email, password) => {
@@ -149,21 +149,15 @@ function App() {
           <Navigation onClickFollowing={followingClickHandler} />
         )}
 
-        {isLoggedIn && !signUp && !forgotPassword (
+        {isLoggedIn && !signUp && !forgotPassword &&
           <Header
             onLogout={logoutHandler}
             userData={personalData}
             ccfDataLoader={ccfDataLoader}
           />
-        )}
-        {isLoggedIn && !signUp && <Following followingClicked={following} />}
-        {isLoggedIn && !signUp && <Data data={codeChefData} />}
-
-
-        {isLoggedIn && !signUp && !forgotPassword && (
-          <Following followingClicked={following} userData={personalData} />
-        )}
-        {isLoggedIn && !signUp && !forgotPassword && <Data />}
+        }
+        {isLoggedIn && !signUp && !forgotPassword && <Following followingClicked={following} />}
+        {isLoggedIn && !signUp && !forgotPassword && <Data data={codeChefData} />}
 
         {isLoggedIn && signUp && !forgotPassword && (
           <Signup onSubmit={signupHandler} />

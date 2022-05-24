@@ -14,5 +14,5 @@ app.use(cors());
 app.use(userRouter);
 
 app.listen(port, () => {
-  console.log("Server is on port", port);
+  console.log("Server is up on port", port);
 });

@@ -22,15 +22,12 @@ const Following = (props) => {
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     searchedUser(inputData);
-    console.log(inputData);
     setInputData("");
   }
 
   const searchedUser = async (data) => {
-    console.log(data);
-    const foundUser = await searchUserAction(props.userData.token, data);
-    console.log(foundUser)
-    setAfterSearching(foundUser);
+    const foundUser = await searchUserAction(data);
+    setAfterSearching(foundUser[0].name);
     return;
   }
 
@@ -97,7 +94,7 @@ const Following = (props) => {
                 >
                   <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                 </svg>{" "}
-                Aditya Sinha
+                {afterSearching}
               </h5>
               </a>
             </div>

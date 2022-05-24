@@ -1,14 +1,14 @@
 import React, { Fragment, useState, useEffect } from "react";
+import { searchUserAction } from "../actions/userActions";
 import "./Following.css";
 
 const Following = (props) => {
   const [followingIsClicked, setFollowingIsClicked] = useState(false);
   const [inputData, setInputData] = useState("");
-  const [followArray, setfollowArray] = useState(["Loading..."]);
+  const [afterSearching, setAfterSearching] = useState("");
 
   useEffect(() => {
     setFollowingIsClicked(true);
-    setfollowArray(props.followingData);
   }, [props]);
 
   const onCrossClickHandler = () => {
@@ -17,12 +17,19 @@ const Following = (props) => {
 
   const onInputHandler = (event) => {
     setInputData(event.target.value);
-  };
+  }
 
-  const onSubmitHandler = (event) => {
+  const onSubmitHandler = async (event) => {
     event.preventDefault();
+    searchedUser(inputData);
     setInputData("");
-  };
+  }
+
+  const searchedUser = async (data) => {
+    const foundUser = await searchUserAction(data);
+    setAfterSearching(foundUser[0].name);
+    return;
+  }
 
   return (
     <Fragment>
@@ -66,43 +73,32 @@ const Following = (props) => {
           </div>
           <div className="input-group search mt-1">
             <div className="form-outline serach_form ms-auto me-auto">
-              <input
-                type="search"
-                placeholder="Search"
-                className="form-control"
-                onChange={onInputHandler}
-              />
+              <input type="search" placeholder="Search" className="form-control" onChange={onInputHandler} />
             </div>
             <div className="ms-auto me-auto mt-1 search_button">
-              <button type="submit" onClick={onSubmitHandler}>
-                Search
-              </button>
+              <button type="submit" onClick={onSubmitHandler}>Search</button>
             </div>
           </div>
           <div className="following_names mt-3">
-            {followArray.map((data) => {
-              return (
-                <div className="mb-2 mt-2">
-                  <a href="#">
-                    <h5>
-                      {" "}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        fill="currentColor"
-                        className="bi bi-person-fill"
-                        viewBox="0 0 16 16"
-                      >
-                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                      </svg>{" "}
-                      {data}
-                    </h5>
-                  </a>
-                </div>
-              );
-            })}
-            {/* <div className="mt-2 mb-2">
+            <div className="mb-2 mt-2">
+              <a href="#">
+              <h5>
+                {" "}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="currentColor"
+                  className="bi bi-person-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                </svg>{" "}
+                {afterSearching}
+              </h5>
+              </a>
+            </div>
+            <div className="mt-2 mb-2">
               <a href="#">
                 <h5>
                   <svg
@@ -115,10 +111,9 @@ const Following = (props) => {
                   >
                     <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                   </svg>{" "}
-                  Ujjwal Raj{" "}
                 </h5>
               </a>
-            </div> */}
+            </div>
           </div>
         </div>
       </header>

@@ -62,29 +62,42 @@ const Header = (props) => {
       </button>
       <header id={style ? "mobHeader" : "header"}>
         <div className="d-flex flex-column mt-2">
+          <div className="brand text-center mt-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="30"
+              height="30"
+              fill="white"
+              className="bi bi-file-code-fill"
+              viewBox="0 0 16 16"
+            >
+              <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM6.646 5.646a.5.5 0 1 1 .708.708L5.707 8l1.647 1.646a.5.5 0 0 1-.708.708l-2-2a.5.5 0 0 1 0-.708l2-2zm2.708 0 2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 8 8.646 6.354a.5.5 0 1 1 .708-.708z" />
+            </svg>
+            <h3>CODEBASIL</h3>
+          </div>
           <img
             src={Profile}
             className="img-fluid rounded-circle mt-4 ms-auto me-auto"
             width="200px"
           />
           <div className="profile">
-            <h1 className="text-light text-center mt-3">
+            <h1 className="text-light text-center mt-2">
               <a href="index.html">{name}</a>
             </h1>
-            <div className="mt-4 mb-3 pt-1">
+            <div className="mt-2 mb-3">
               <h4 className="text-center mt-5">
                 <a href="#">CODECHEF</a>
               </h4>
               <div className="text-light text-center">{stars}</div>
 
-              <h4 className="text-center mt-5">
+              <h4 className="text-center mt-4">
                 <a href="#">CODEFORCES</a>
               </h4>
               <div className="text-light text-center">
                 Currently Unavailable
               </div>
 
-              <h4 className="text-center mt-5">
+              <h4 className="text-center mt-4">
                 <a href="#">HACKERRANK</a>
               </h4>
               <div className="text-light text-center">

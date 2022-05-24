@@ -7,6 +7,9 @@ import Signup from "./Sign-Up/Signup";
 import { loginAction, logoutAction, signUpAction } from "./actions/userActions";
 import Following from "./Following/Following";
 import Data from "./Data/Data";
+
+import PasswordReset from "./forgot-password/PasswordReset";
+
 import { data } from "cheerio/lib/api/attributes";
 
 function App() {
@@ -15,6 +18,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [signUp, setSignUp] = useState(false);
   const [following, setFollowing] = useState(false);
+  const [forgotPassword, setForgotPassword] = useState(false);
 
   // const x = localStorage.getItem("userInfo");
 
@@ -30,7 +34,7 @@ function App() {
       name: "Loading...",
       email: "Loading...",
       codechefUsername: "Loading...",
-      following: ["Loading..."],
+      following: [],
     },
     codechefData: {
       username: "Loading...",
@@ -62,8 +66,8 @@ function App() {
     }
   }, []);
 
-  const ccfDataLoader = (data) => {
-    setCodeChefData(data);
+  const ccfDataLoader = async (data) => {
+    await setCodeChefData(data);
   };
 
   const loginHandler = async (email, password) => {
@@ -110,10 +114,9 @@ function App() {
     );
     console.log(afterLoginData);
     if (afterLoginData.user) {
-      localStorage.setItem("userInfo", JSON.stringify(afterLoginData));
       setPersonalData(afterLoginData);
       setIsLoggedIn(true);
-      setSignUp(false);
+      setSignUp(true);
     }
   };
 
@@ -122,31 +125,43 @@ function App() {
     setSignUp(true);
   };
 
+  const directToPasswordReset = () => {
+    setIsLoggedIn(false);
+    setIsLoggedIn(false);
+    setForgotPassword(true);
+    console.log("hit2");
+  };
+
   return (
     <div>
       <AuthContext.Provider value={{ isloggedIn: isLoggedIn }}>
-        {!isLoggedIn && !signUp && (
-          <Login onLogin={loginHandler} onSignup={directToSignup} />
+        {!isLoggedIn && !signUp && !forgotPassword && (
+          <Login
+            onLogin={loginHandler}
+            onSignup={directToSignup}
+            onForgotYourPassword={directToPasswordReset}
+          />
         )}
-        {isLoggedIn && !signUp && (
+
+        {!isLoggedIn && !signUp && forgotPassword && <PasswordReset />}
+
+        {isLoggedIn && !signUp && !forgotPassword && (
           <Navigation onClickFollowing={followingClickHandler} />
         )}
-        {isLoggedIn && !signUp && (
+
+        {isLoggedIn && !signUp && !forgotPassword &&
           <Header
             onLogout={logoutHandler}
             userData={personalData}
             ccfDataLoader={ccfDataLoader}
           />
-        )}
-        {isLoggedIn && !signUp && (
-          <Following
-            followingClicked={following}
-            followingData={codeChefData.user.following}
-          />
-        )}
-        {isLoggedIn && !signUp && <Data data={codeChefData} />}
+        }
+        {isLoggedIn && !signUp && !forgotPassword && <Following followingClicked={following} />}
+        {isLoggedIn && !signUp && !forgotPassword && <Data data={codeChefData} />}
 
-        {isLoggedIn && signUp && <Signup onSubmit={signupHandler} />}
+        {isLoggedIn && signUp && !forgotPassword && (
+          <Signup onSubmit={signupHandler} />
+        )}
       </AuthContext.Provider>
     </div>
   );

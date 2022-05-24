@@ -1,6 +1,9 @@
 import React, { Fragment, useReducer, useState } from "react";
 import "./Signup.css";
+import Modal from "../Modal/Modal"
 const Signup = (props) => {
+
+  const [sendOtp, setSendOtp] = useState(false);
   const emailReducer = (state, action) => {
     if (action.type === "USER_EMAIL") {
       return {
@@ -119,14 +122,6 @@ const Signup = (props) => {
     dispachedEmail({ type: "USER_EMAIL", val: event.target.value });
   };
 
-  const ccUnChangeHandler = (event) => {
-    // console.log("This one", event.target.value);
-    setCodechefId(event.target.value);
-  };
-  const nameChangeHandler = (event) => {
-    setName(event.target.value);
-  };
-
   const emailValidator = () => {
     dispachedEmail({ type: "EMAIL_VALID" });
     dispachedBlurState({ type: "EMAIL_BLUR" });
@@ -153,8 +148,14 @@ const Signup = (props) => {
     dispachedBlurState({ type: "CONFIRM_PASSWORD_BLUR" });
   };
 
+  const otpVerified = () => {
+    setSendOtp(false);
+  }
+
   const onSubmitHandler = (event) => {
     event.preventDefault();
+    
+    
     console.log(
       emailState.valueEmail,
       passwordState.valuePassword,
@@ -168,16 +169,17 @@ const Signup = (props) => {
       name,
       codechefId
     );
+    setSendOtp(true);
   };
   return (
     <Fragment>
       <div className="signup">
-        <div className="signup_header text-center mb-5 mt-3">
+        <div className="signup_header text-center mb-5 pt-3 pb-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="35"
             height="35"
-            fill="currentColor"
+            fill="#fff"
             className="bi bi-file-code-fill"
             viewBox="0 0 16 16"
           >
@@ -185,7 +187,7 @@ const Signup = (props) => {
           </svg>
           <h1>Codebasil</h1>
         </div>
-        <div className="header_description text-center">
+        <div className="header_description text-center mb-5">
           <h3>Sign Up For Free</h3>
         </div>
         <form className="text-center mb-5" onSubmit={onSubmitHandler}>
@@ -294,10 +296,8 @@ const Signup = (props) => {
             <label className="mb-2 mt-3">What should we call you?</label>
             <br />
             <input
-              onChange={nameChangeHandler}
               placeholder="Enter a profile name."
               type="text"
-              required
             ></input>
           </div>
           <div className="mt-4 mb-4">
@@ -313,16 +313,14 @@ const Signup = (props) => {
           <div className="mt-4 mb-4">
             <label className="mb-2 mt-3">Codechef User Id</label>
             <br />
-            <input
-              onChange={ccUnChangeHandler}
-              placeholder="Codechef user id."
-            ></input>
+            <input placeholder="Codechef user id."></input>
           </div>
           <button className="mt-3 mb-3" type="submit">
-            SIGN UP
+            SEND OTP
           </button>
         </form>
       </div>
+      {sendOtp && <Modal onOtpVerified={otpVerified} emailVerify={emailState.valueEmail} />}
     </Fragment>
   );
 };

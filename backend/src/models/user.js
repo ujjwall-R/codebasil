@@ -17,6 +17,10 @@ const userSchema = new mongoose.Schema({
   codechefUsername: { type: String, required: true, trim: true },
   following: [],
   tokens: [{ token: { type: String, require: true } }],
+  varified : {
+    type: Boolean,
+    default: false,
+  }
 });
 
 //generating authentication token
@@ -56,6 +60,15 @@ userSchema.statics.findByCredentials = async (email, password) => {
 
   return user;
 };
+
+userSchema.statics.findByEmail = async (email) => {
+  const user = await User.findOne({ email });
+
+  if(!user) {
+    throw new Error("Email not found!");
+  }
+  return user;
+}
 
 //hashing password before saving
 userSchema.pre("save", async function (next) {

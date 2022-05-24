@@ -2,6 +2,10 @@ import express from "express";
 import User from "../models/user.js";
 import { auth } from "../middleware/auth.js";
 import { getRawData } from "../codechef.js";
+import VarificationOTP from "../models/VarificationOTP.js";
+import { generateOTP } from "../utils.js/otpGenerator.js";
+import bcrypt from "bcryptjs";
+import { sendEmail } from "../emails/sendgrid.js";
 
 const router = new express.Router();
 
@@ -20,6 +24,17 @@ router.get("/hi", async (req, res) => {
 router.post("/users", async (req, res) => {
   const user = new User(req.body);
 
+  const OTP = generateOTP();
+  console.log(OTP);
+  const varificationOTP = new VarificationOTP({
+    owner: user._id,
+    token: OTP,
+  });
+
+  sendEmail(user.email, OTP);
+
+  await varificationOTP.save();
+
   try {
     await user.save();
     const token = await user.generateAuthToken();
@@ -31,6 +46,30 @@ router.post("/users", async (req, res) => {
   }
 });
 
+router.post("/users/otp", async (req, res) => {
+  const user = await User.findByEmail(req.body.email);
+  if (!user) {
+    return res.status(401).send("User not found!");
+  }
+
+  const OTP = await VarificationOTP.findOne({ owner: user._id });
+  const isMatch = await bcrypt.compare(req.body.otp, OTP.token);
+
+  if (!isMatch) {
+    await User.deleteOne({ email: req.body.email });
+    throw new Error("Invalid OTP!");
+  }
+
+  user.varified = true;
+
+  await VarificationOTP.findByIdAndDelete(OTP._id);
+  await user.save();
+
+  res.status(200).send();
+
+  return;
+});
+
 //@description Auth user and get token
 //@route POST /users/login
 //@access Public
@@ -40,8 +79,51 @@ router.post("/users/login", async (req, res) => {
       req.body.email,
       req.body.password
     );
+
+    if (!user.varified) {
+      throw new Error("user is not verified!");
+    }
+
     const token = await user.generateAuthToken();
     res.status(200).send({ user, token });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({ error: error });
+  }
+});
+
+router.post("/users/reset/getotp", async (req, res) => {
+  try {
+    console.log(req.body.email);
+    const user = await User.findByEmail(req.body.email);
+    const OTP = generateOTP();
+    console.log(OTP);
+    const varificationOTP = new VarificationOTP({
+      owner: user._id,
+      token: OTP,
+    });
+
+    sendEmail(user.email, OTP);
+    
+    await varificationOTP.save();
+    res.status(200).send("sucess");
+  } catch (error) {
+    res.status(400).send({ error: error });
+  }
+});
+
+router.post("/users/reset", async (req, res) => {
+  try {
+    const user = await User.findByEmail(req.body.email);
+    const OTP = await VarificationOTP.findOne({ owner: user._id });
+    const isMatch = await bcrypt.compare(req.body.otp, OTP.token);
+    if (!isMatch) {
+      throw new Error("OTP invalid!");
+    }
+    user.password = req.body.password;
+    await VarificationOTP.findByIdAndDelete(OTP._id);
+    user.save();
+    res.status(200).send("success!");
   } catch (error) {
     console.log(error);
     res.status(400).send({ error: error });
@@ -120,16 +202,20 @@ router.get("/users/me", auth, async (req, res) => {
 //@description get/search user by email
 //@route GET /users/search
 //@access Public
-router.get("/users/search", async (req, res) => {
+router.post("/users/search", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
 
     if (!user) {
       throw new Error("User not found!");
     }
+
+    console.log(user);
     const codechefData = await getRawData(user.codechefUsername);
+    const userName = user.name;
 
     const userData = [
+      {name: userName},
       { codechefData: codechefData },
       { codeforcesData: {} },
       { hackerrankData: {} },
@@ -148,7 +234,7 @@ router.post("/users/follow/:email", auth, async (req, res) => {
   try {
     const userToFollow = await User.findOne({ email: req.params.email });
     const user = req.user;
-    console.log("This", user);
+
     if (!userToFollow) {
       throw new Error("No such user exist!");
     }

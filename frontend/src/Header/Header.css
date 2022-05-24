@@ -1,0 +1,173 @@
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 275px;
+  transition: all ease-in-out 0.5s;
+  z-index: 9997;
+  transition: all 0.5s;
+  padding: 0 15px;
+  background: rgb(0, 56, 78);
+  overflow-y: auto;
+  border: 8px solid black;
+}
+.brand {
+  border-bottom: thin solid white;
+}
+.brand h3 {
+  color: white;
+  font-weight: 400;
+}
+.profile h1 {
+  font-size: 24px;
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  -moz-text-align-last: center;
+  text-align-last: center;
+  font-family: "Poppins", sans-serif;
+}
+.profile h1 a,
+.profile h1 a:hover {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 300;
+}
+.profile h4 a,
+.profile h4 a:hover {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 200;
+}
+
+@media (max-width: 1199px) {
+  #header {
+    left: -300px;
+  }
+}
+
+.mobile-nav-toggle {
+  position: fixed;
+  left: 15px;
+  top: 5px;
+  z-index: 9998;
+  border: 0;
+  font-size: 24px;
+  transition: all 0.4s;
+  outline: none !important;
+  background: none;
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  border-radius: 50px;
+  cursor: pointer;
+}
+.toggler-icon {
+  width: 1.5em;
+  height: 1em;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  transform: rotate(0deg);
+  transition: 400ms ease-in-out;
+}
+
+.toggler-icon span {
+  display: block;
+  position: absolute;
+  height: 0.07em;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 9px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: 400ms ease-in-out;
+}
+
+.toggler-icon span:nth-child(1) {
+  top: 0em;
+}
+
+.toggler-icon span:nth-child(2),
+.toggler-icon span:nth-child(3) {
+  top: 0.4em;
+}
+
+.toggler-icon span:nth-child(4) {
+  top: 0.79em;
+}
+
+.toggler-icon.open span:nth-child(1) {
+  top: 0.55em;
+  width: 0%;
+  left: 50%;
+}
+
+.toggler-icon.open span:nth-child(2) {
+  transform: rotate(45deg);
+}
+
+.toggler-icon.open span:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+.toggler-icon.open span:nth-child(4) {
+  top: 0.45em;
+  width: 0%;
+  left: 50%;
+}
+
+#mobHeader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 300px;
+  transition: all ease-in-out 0.5s;
+  z-index: 9997;
+  transition: all 0.5s;
+  padding: 0 15px;
+  background: rgb(0, 56, 78);
+  overflow-y: auto;
+  border: thick solid black;
+}
+
+@media (max-width: 1199px) {
+  #mobHeader {
+    left: 0px;
+  }
+}
+.logout button {
+  background-color: rgb(0, 82, 114);
+  border-color: rgb(255, 255, 255);
+  border-radius: 15px;
+  color: white;
+  font-weight: 350;
+  border-width: 0.1px;
+  padding-left: 35px;
+  padding-right: 35px;
+  font-weight: 500;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  letter-spacing: 1.5px;
+}
+
+.logout button:hover {
+  background: none;
+  transition: 350ms;
+}
+
+#header img {
+  border: 1px solid white;
+  width: 175px;
+}
+
+#mobHeader img {
+  border: 1px solid white;
+}

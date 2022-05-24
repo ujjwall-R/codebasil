@@ -1,0 +1,32 @@
+
+.navbar {
+    background-color: rgb(0, 56, 78);
+}
+.navbar ul {
+    display: flex;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+.navbar ul li {
+    list-style-type: none;
+}
+.navbar ul li a{
+    text-decoration: none;
+    color: white;
+}
+.navbar ul li a h4:hover {
+    font-size: 27px;
+    transition: 0.15s;
+}
+.navbar ul li a h4 {
+    font-weight: 340;
+}
+@media (max-width: 499px) {
+    .navbar ul li a h4{
+        font-size: 15px;
+    }
+    .navbar ul li a h4:hover {
+        font-size: 20px;
+        transition: 0.15s;
+    }
+}

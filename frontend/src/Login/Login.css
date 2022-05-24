@@ -1,0 +1,96 @@
+.login {
+    width: 100vw;
+    height: 100vh;
+}
+.login_header {
+    background-color: rgb(0, 60, 83);
+}
+.login_header h1{
+    color: #fff;
+    font-weight: 500;
+}
+.continue p{
+    font-weight: 800;
+}
+
+.login form button {
+    background: none;
+    background-color: rgb(0, 60, 83);
+    border-radius: 500px;
+    color: white;
+    font-weight: 350;
+    border-width: 1px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+}
+.login form label {
+    font-weight: 700;
+}
+.login form input {
+    width: 350px;
+    height: 42px;
+    border-width: 0.3px;
+    background: none;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.emailInvalid input,  .passwordInvalid input {
+    border-color: red !important;
+}
+
+.emailInvalid input:focus, .passwordInvalid input:focus {
+    outline: none !important;
+    border: 2px solid red;
+
+}
+
+.emailInvalid p, .passwordInvalid p {
+    color: red;
+    font-weight: 650;
+    font-size: 14px;
+}
+
+.login form a {
+    color: rgb(99, 99, 99);
+}
+.form_border {
+    border-bottom: 0.07px solid rgb(0, 74, 104);
+}
+.noAccount p {
+    font-weight: 800;
+}
+
+.noAccount button {
+    background: none;
+    border-radius: 500px;
+    color: rgb(0, 74, 104);
+    font-weight: 350;
+    border-width: 1px;
+    padding-left: 45px;
+    padding-right: 45px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+.noAccount button:hover {
+    
+    background: none;
+    background-color: rgb(0, 60, 83);
+    border-radius: 500px;
+    color: white;
+    font-weight: 350;
+    border-width: 1px;
+    padding-left: 45px;
+    padding-right: 45px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    font-weight: 500;
+    transition: 450ms;
+}

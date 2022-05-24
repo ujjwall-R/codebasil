@@ -1,0 +1,41 @@
+#main {
+    margin-left: 300px;
+    margin-right: 300px;
+}
+.data {
+    border-bottom: 10px solid rgb(0, 56, 78);
+}
+.codechef h3 {
+    font-weight: 700;
+    color: rgb(0, 111, 155);
+    letter-spacing: 0.2px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    position: relative;
+    color: #173b6c;
+}
+
+.codechef h3::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 75px;
+    height: 4px;
+    background: rgb(17, 141, 190);
+    bottom: 0;
+    left: 0;
+  }
+.data h5 {
+    font-size: 20px;
+    font-weight: 250;
+}
+.data h5 span {
+    font-weight: 500;
+}
+
+@media (max-width: 1199px) {
+    #main {
+        margin-left: 0;
+        margin-right: 0;
+      }
+}

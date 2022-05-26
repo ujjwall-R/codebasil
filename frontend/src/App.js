@@ -73,7 +73,7 @@ function App() {
   const loginHandler = async (email, password) => {
     // console.log(email, password);
     const afterLoginData = await loginAction(email, password);
-
+    console.log(afterLoginData);
     if (afterLoginData.user) {
       localStorage.setItem("userInfo", JSON.stringify(afterLoginData));
       setPersonalData(afterLoginData);
@@ -149,18 +149,22 @@ function App() {
           <Navigation onClickFollowing={followingClickHandler} />
         )}
 
-        {isLoggedIn && !signUp && !forgotPassword &&
+        {isLoggedIn && !signUp && !forgotPassword && (
           <Header
             onLogout={logoutHandler}
             userData={personalData}
             ccfDataLoader={ccfDataLoader}
           />
-        }
-        {isLoggedIn && !signUp && !forgotPassword && <Following followingClicked={following} />}
-        {isLoggedIn && !signUp && !forgotPassword && <Data data={codeChefData} />}
+        )}
+        {isLoggedIn && !signUp && !forgotPassword && (
+          <Following followingClicked={following} />
+        )}
+        {isLoggedIn && !signUp && !forgotPassword && (
+          <Data data={codeChefData} />
+        )}
 
         {isLoggedIn && signUp && !forgotPassword && (
-          <Signup onSubmit={signupHandler} />
+          <Signup onSubmit={signupHandler} cdData={codeChefData} />
         )}
       </AuthContext.Provider>
     </div>

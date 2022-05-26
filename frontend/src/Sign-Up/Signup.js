@@ -1,8 +1,8 @@
 import React, { Fragment, useReducer, useState } from "react";
 import "./Signup.css";
-import Modal from "../Modal/Modal"
+import Modal from "../Modal/Modal";
+import { prop } from "cheerio/lib/api/attributes";
 const Signup = (props) => {
-
   const [sendOtp, setSendOtp] = useState(false);
   const emailReducer = (state, action) => {
     if (action.type === "USER_EMAIL") {
@@ -108,8 +108,14 @@ const Signup = (props) => {
   );
 
   //dummyStates
-  const [name, setName] = useState("Aditya Sinha");
-  const [codechefId, setCodechefId] = useState("aditya_621");
+  const [name, setName] = useState("");
+  const [codechefId, setCodechefId] = useState("");
+  const ccfIdOnchange = (event) => {
+    setCodechefId(event.target.value);
+  };
+  const nameOnchange = (event) => {
+    setName(event.target.value);
+  };
   //
 
   const [blurState, dispachedBlurState] = useReducer(blurReducer, {
@@ -150,12 +156,11 @@ const Signup = (props) => {
 
   const otpVerified = () => {
     setSendOtp(false);
-  }
+  };
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    
-    
+
     console.log(
       emailState.valueEmail,
       passwordState.valuePassword,
@@ -296,6 +301,7 @@ const Signup = (props) => {
             <label className="mb-2 mt-3">What should we call you?</label>
             <br />
             <input
+              onChange={nameOnchange}
               placeholder="Enter a profile name."
               type="text"
             ></input>
@@ -313,14 +319,22 @@ const Signup = (props) => {
           <div className="mt-4 mb-4">
             <label className="mb-2 mt-3">Codechef User Id</label>
             <br />
-            <input placeholder="Codechef user id."></input>
+            <input
+              onChange={ccfIdOnchange}
+              placeholder="Codechef user id."
+            ></input>
           </div>
           <button className="mt-3 mb-3" type="submit">
             SEND OTP
           </button>
         </form>
       </div>
-      {sendOtp && <Modal onOtpVerified={otpVerified} emailVerify={emailState.valueEmail} />}
+      {sendOtp && (
+        <Modal
+          onOtpVerified={otpVerified}
+          emailVerify={emailState.valueEmail}
+        />
+      )}
     </Fragment>
   );
 };
